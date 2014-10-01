@@ -8,11 +8,11 @@ The CMS API allows creation of video objects and retrieval of video information.
 
 The base URL for these APIs is:
 
-    https://cms.api.brightcove.com/v1
+    https://cms.api.brightcove.com/v1beta1
 
 # Group Manipulate Video Information
 
-Create a single player and retrieve various video information. The endpoint is determined by the information requested. Some retrieval requests can use either the video ID or reference ID.
+Create a single video and retrieve various video information. The endpoint is determined by the information requested. Some retrieval requests can use either the video ID or reference ID.
 
 ## POST to create a video object/GET information on all videos [/accounts/{accountId}/videos]
 
@@ -73,13 +73,28 @@ Use only the account ID and retrieve information on all videos in the account.
 
     + Body
 
-            [{"id": "1234"},...]
+            [ {
+              "id" : "3790053031001",
+              "account_id" : "20318290001",
+              "complete" : true,
+              "created_at" : "2014-09-17T15:56:59.564Z",
+              "cue_points" : [ ],
+              "custom_fields" : {
+                "topic" : "Gallery - Customizing a Site",
+                "inproduct" : "Gallery"
+              },...]
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+
+              "error_code" : "NOT_FOUND",
+
+              "message" : "Resource does not exist."
+
+            } ]
 
 ## GET a single video [/accounts/{accountId}/videos/{videoId}]
 
@@ -106,13 +121,46 @@ Use the video ID to retrieve information for a single video
 
     + Body
 
-            {"id": "1234"}
+            {
+              "id" : "610747847001",
+              "account_id" : "20318290001",
+              "complete" : true,
+              "created_at" : "2010-09-17T21:35:49.385Z",
+              "cue_points" : [ ],
+              "custom_fields" : {
+                "inproduct" : "Video Cloud",
+                "topic" : "VC - General Information"
+              },
+              "description" : "Learn about Brightcove's Smart players that          will allow your videos to be viewed on desktop and mobile devices",
+              "duration" : 136627,
+              "geo" : null,
+              "long_description" : null,
+              "name" : "HTML5 Smart Players",
+              "reference_id" : "610747847001",
+              "schedule" : null,
+              "sharing" : {
+                "by_external_acct" : true,
+                "by_id" : "301925175",
+                "source_id" : "407591857001",
+                "to_external_acct" : false,
+                "by_reference" : false
+              },
+              "state" : "INACTIVE",
+              "tags" : [ "basics", "studio", "3play_processed", "players", "drupal", "express paid" ],
+              "updated_at" : "2013-12-12T14:44:26.517Z"
+            }
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+
+              "error_code" : "NOT_FOUND",
+
+              "message" : "Resource does not exist."
+
+            } ]
 
 ## GET a single video by reference ID [/accounts/{accountId}/videos/ref:{refId}]
 
@@ -139,13 +187,46 @@ Use the video reference ID to retrieve information for a single video
 
     + Body
 
-            {"id": "1234"}
+            {
+              "id" : "610747847001",
+              "account_id" : "20318290001",
+              "complete" : true,
+              "created_at" : "2010-09-17T21:35:49.385Z",
+              "cue_points" : [ ],
+              "custom_fields" : {
+                "inproduct" : "Video Cloud",
+                "topic" : "VC - General Information"
+              },
+              "description" : "Learn about Brightcove's Smart players that          will allow your videos to be viewed on desktop and mobile devices",
+              "duration" : 136627,
+              "geo" : null,
+              "long_description" : null,
+              "name" : "HTML5 Smart Players",
+              "reference_id" : "610747847001",
+              "schedule" : null,
+              "sharing" : {
+                "by_external_acct" : true,
+                "by_id" : "301925175",
+                "source_id" : "407591857001",
+                "to_external_acct" : false,
+                "by_reference" : false
+              },
+              "state" : "INACTIVE",
+              "tags" : [ "basics", "studio", "3play_processed", "players", "drupal", "express paid" ],
+              "updated_at" : "2013-12-12T14:44:26.517Z"
+            }
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+
+              "error_code" : "NOT_FOUND",
+
+              "message" : "Resource does not exist."
+
+            } ]
 
 ## GET the thumbnail for a specific video by video ID [/accounts/{accountId}/videos/{videoId}/images]
 
