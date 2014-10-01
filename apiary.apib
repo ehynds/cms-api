@@ -1,0 +1,280 @@
+FORMAT: 1A
+HOST: https://cms.api.brightcove.com/v1
+
+# CMS API
+The CMS API allows creation of video objects and retrieval of video information.
+
+## Base URL
+
+The base URL for these APIs is:
+
+    https://cms.api.brightcove.com/v1
+
+# Group Manipulate Video Information
+
+Create a single player and retrieve various video information. The endpoint is determined by the information requested. Some retrieval requests can use either the video ID or reference ID.
+
+## POST to create a video object/GET information on all videos [/accounts/{accountId}/videos]
+
+### POST
+Supply a name and create a video object with that name. The response will contain the ID for the video object.
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "name": "My New Video"
+            }
+
++ Response 200
+
+    + Body
+
+            {
+                "id": "1234",
+                "name": "My New Video"
+            }
+            
++ Response 400
+
+    + Body
+
+            {}
+
+### GET
+Use only the account ID and retrieve information on all videos in the account.
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [{"id": "1234"},...]
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET a single video [/accounts/{accountId}/videos/{videoId}]
+
+### GET
+Use the video ID to retrieve information for a single video
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + videoId (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {"id": "1234"}
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET a single video by reference ID [/accounts/{accountId}/videos/ref:{refId}]
+
+### GET
+Use the video reference ID to retrieve information for a single video
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + refId (required string `12345678`) ... The reference ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {"id": "1234"}
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET the thumbnail for a specific video by video ID [/accounts/{accountId}/videos/{videoId}/images]
+
+### GET
+Retrieve video's thumbnail by video ID
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + videoId (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {"thumbnail": "http://foo.com"}
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET the thumbnail for a specific video  by reference ID [/accounts/{accountId}/videos/ref:{refId}/images]
+
+### GET
+Retrieve video's thumbnail by reference ID
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + refId (required string `12345678`) ... The reference ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {"thumbnail": "http://foo.com"}
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET the sources for a specific video  by ID [/accounts/{accountId}/videos/{videoId}/sources]
+
+### GET
+Retrieve video's sources by video ID
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + videoId (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [{"src": "http://foo.com"}, ...]
+            
++ Response 400
+
+    + Body
+
+            {}
+
+## GET the sources for a specific video  by reference ID [/accounts/{accountId}/videos/ref:{refId}/sources]
+
+### GET
+Retrieve video's sources by reference ID
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + refId (required string `12345678`) ... The reference ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [{"src": "http://foo.com"}, ...]
+            
++ Response 400
+
+    + Body
+
+            {}
