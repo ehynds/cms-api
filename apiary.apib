@@ -219,10 +219,10 @@ Use the video reference ID to retrieve information for a single video
               "message" : "Resource does not exist."
             } ]
 
-## GET the thumbnail for a specific video by video ID [/accounts/{accountId}/videos/{videoId}/images]
+## GET the images for a specific video by video ID [/accounts/{accountId}/videos/{videoId}/images]
 
 ### GET
-Retrieve video's thumbnail by video ID
+Retrieve video's images by video ID
 
 + Parameters
 
@@ -244,18 +244,30 @@ Retrieve video's thumbnail by video ID
 
     + Body
 
-            {"thumbnail": "http://foo.com"}
+            {
+              "thumbnail" : {
+                "id" : "2900507794001",
+                "src" : "http://brightcove04.o.brightcove.com/20318290001/20318290001_2900507794001_th-52a1fae0e4b00f8cb61e1f72-1592194025001.jpg?pubId=20318290001"
+              },
+              "poster" : {
+                "id" : "2900507792001",
+                "src" : "http://brightcove04.o.brightcove.com/20318290001/20318290001_2900507792001_vs-52a1fae0e4b00f8cb61e1f72-1592194025001.jpg?pubId=20318290001"
+              }
+            }
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
 
-## GET the thumbnail for a specific video  by reference ID [/accounts/{accountId}/videos/ref:{refId}/images]
+## GET the images for a specific video  by reference ID [/accounts/{accountId}/videos/ref:{refId}/images]
 
 ### GET
-Retrieve video's thumbnail by reference ID
+Retrieve video's images by reference ID
 
 + Parameters
 
@@ -277,13 +289,25 @@ Retrieve video's thumbnail by reference ID
 
     + Body
 
-            {"thumbnail": "http://foo.com"}
+            {
+              "thumbnail" : {
+                "id" : "2900507794001",
+                "src" : "http://brightcove04.o.brightcove.com/20318290001/20318290001_2900507794001_th-52a1fae0e4b00f8cb61e1f72-1592194025001.jpg?pubId=20318290001"
+              },
+              "poster" : {
+                "id" : "2900507792001",
+                "src" : "http://brightcove04.o.brightcove.com/20318290001/20318290001_2900507792001_vs-52a1fae0e4b00f8cb61e1f72-1592194025001.jpg?pubId=20318290001"
+              }
+            }
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
 
 ## GET the sources for a specific video  by ID [/accounts/{accountId}/videos/{videoId}/sources]
 
@@ -310,13 +334,66 @@ Retrieve video's sources by video ID
 
     + Body
 
-            [{"src": "http://foo.com"}, ...]
+            [ {
+              "id" : "2900506580001",
+              "app_name" : "rtmp://cp150446.edgefcs.net/ondemand",
+              "stream_name" : "mp4:20318290001/20318290001_2900506580001_video-player-module-demo.mp4?__nn__=1497926354001&slist=20318290001/&auth=daEbUb_a_a.b_a2bQd0cpcrdXa9a2c7bXdl-buleeG-bWG-qmAAuptx_yEyo_CEAA_GvB&aifp=bcosuds",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 1063687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 90933140,
+              "uploaded_at" : "2013-12-06T16:38:13.683Z"
+            }, {
+              "id" : "2900506580001",
+              "src" : "http://uds.ak.o.brightcove.com/20318290001/20318290001_2900506580001_video-player-module-demo.mp4",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 1063687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 90933140,
+              "uploaded_at" : "2013-12-06T16:38:13.683Z"
+            }, {
+              "id" : "2900507785001",
+              "app_name" : "rtmp://cp150446.edgefcs.net/ondemand",
+              "stream_name" : "mp4:20318290001/20318290001_2900507785001_video-player-module-demo.mp4?__nn__=1497926354001&slist=20318290001/&auth=daEbUb_a_a.b_a2bQd0cpcrdXa9a2c7bXdl-buleeG-bWG-qmAAuptx_yEyo_CEAA_GvB&aifp=bcosuds",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 676687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 59849740,
+              "uploaded_at" : "2013-12-06T16:37:35.397Z"
+            }, {
+              "id" : "2900507785001",
+              "src" : "http://uds.ak.o.brightcove.com/20318290001/20318290001_2900507785001_video-player-module-demo.mp4",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 676687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 59849740,
+              "uploaded_at" : "2013-12-06T16:37:35.397Z"
+            }, {
+              "src" : "http://c.brightcove.com/services/mobile/streaming/index/master.m3u8?videoId=2900459533001&pubId=20318290001",
+              "container" : "M2TS",
+              "codec" : "H264"
+            } ]
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
 
 ## GET the sources for a specific video  by reference ID [/accounts/{accountId}/videos/ref:{refId}/sources]
 
@@ -343,10 +420,63 @@ Retrieve video's sources by reference ID
 
     + Body
 
-            [{"src": "http://foo.com"}, ...]
+            [ {
+              "id" : "2900506580001",
+              "app_name" : "rtmp://cp150446.edgefcs.net/ondemand",
+              "stream_name" : "mp4:20318290001/20318290001_2900506580001_video-player-module-demo.mp4?__nn__=1497926354001&slist=20318290001/&auth=daEbUb_a_a.b_a2bQd0cpcrdXa9a2c7bXdl-buleeG-bWG-qmAAuptx_yEyo_CEAA_GvB&aifp=bcosuds",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 1063687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 90933140,
+              "uploaded_at" : "2013-12-06T16:38:13.683Z"
+            }, {
+              "id" : "2900506580001",
+              "src" : "http://uds.ak.o.brightcove.com/20318290001/20318290001_2900506580001_video-player-module-demo.mp4",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 1063687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 90933140,
+              "uploaded_at" : "2013-12-06T16:38:13.683Z"
+            }, {
+              "id" : "2900507785001",
+              "app_name" : "rtmp://cp150446.edgefcs.net/ondemand",
+              "stream_name" : "mp4:20318290001/20318290001_2900507785001_video-player-module-demo.mp4?__nn__=1497926354001&slist=20318290001/&auth=daEbUb_a_a.b_a2bQd0cpcrdXa9a2c7bXdl-buleeG-bWG-qmAAuptx_yEyo_CEAA_GvB&aifp=bcosuds",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 676687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 59849740,
+              "uploaded_at" : "2013-12-06T16:37:35.397Z"
+            }, {
+              "id" : "2900507785001",
+              "src" : "http://uds.ak.o.brightcove.com/20318290001/20318290001_2900507785001_video-player-module-demo.mp4",
+              "codec" : "H264",
+              "container" : "MP4",
+              "encoding_rate" : 676687,
+              "duration" : 700639,
+              "height" : 720,
+              "width" : 1280,
+              "size" : 59849740,
+              "uploaded_at" : "2013-12-06T16:37:35.397Z"
+            }, {
+              "src" : "http://c.brightcove.com/services/mobile/streaming/index/master.m3u8?videoId=2900459533001&pubId=20318290001",
+              "container" : "M2TS",
+              "codec" : "H264"
+            } ]
             
 + Response 400
 
     + Body
 
-            {}
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
