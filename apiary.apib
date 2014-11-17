@@ -310,6 +310,8 @@ New values for video properties are passed as a JSON object in the body. The fol
 * If the property is an array field ALL array values must be supplied or only the one(s) passed in the body will exist; for instance you cannot update just one cuepoint array element, all cuepoints must be in the JSON object
 * If the property is a map field single child properties can be updated, for instance to update part of the schedule map you would use <code>"schedule": {"ends_at": "new value"}</code> in the body  
 
+The response will display all video information, with newly updated property values
+
 + Parameters
 
     + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
