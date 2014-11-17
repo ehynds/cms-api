@@ -206,7 +206,7 @@ Use only the account ID and retrieve information on all videos in the account.
               "message" : "Resource does not exist."
             } ]
 
-## GET a single video [/accounts/{accountId}/videos/{videoId}]
+## GET a single video/PATCH to update [/accounts/{accountId}/videos/{videoId}]
 
 ### GET
 Use the video ID to retrieve information for a single video
@@ -301,6 +301,109 @@ Use the video ID to retrieve information for a single video
               "error_code" : "NOT_FOUND",
               "message" : "Resource does not exist."
             } ]
+
+### PATCH
+Update video properties using the video ID to identify video
+
+New values for video properties are passed as a JSON object in the body. The following are special cases to consider:
+* For any given property a new value can be supplied and no other fields will be affected
+* If the property is an array field ALL array values must be supplied or only the one(s) passed in the body will exist; for instance you cannot update just one cuepoint array element, all cuepoints must be in the JSON object
+* If the property is a map field single child properties can be updated, for instance to update part of the schedule map you would use <code>"schedule": {"ends_at": "new value"}</code> in the body  
+
++ Parameters
+
+    + accountId (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + videoId (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "name": "Updated Name",
+              "description": "Updated description"
+            }
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "2114345471001",
+              "account_id" : "1507807800001",
+              "complete" : true,
+              "created_at" : "2013-01-23T19:06:16.328Z",
+              "cue_points" : [ {
+                "name" : "Flying Off",
+                "type" : "CODE",
+                "time" : 2.64,
+                "metadata" : null,
+                "force_stop" : false,
+                "asset_id" : null
+              }, {
+                "name" : "Pre-roll",
+                "type" : "AD",
+                "time" : 0.0,
+                "metadata" : null,
+                "force_stop" : false,
+                "asset_id" : null
+              }, {
+                "name" : "Bird Back",
+                "type" : "CODE",
+                "time" : 5.938,
+                "metadata" : null,
+                "force_stop" : false,
+                "asset_id" : null
+              }, {
+                "name" : "Post-roll",
+                "type" : "AD",
+                "time" : 8.242,
+                "metadata" : null,
+                "force_stop" : false,
+                "asset_id" : null
+              } ],
+              "custom_fields" : {
+                "customfield1" : "Approved"
+              },
+              "description" : "Short description for titmouse.",
+              "duration" : 8242,
+              "economics" : "AD_SUPPORTED",
+              "geo" : null,
+              "images" : {
+                "thumbnail" : {
+                  "id" : "3815806023001",
+                  "src" : "http://brightcove.vo.llnwd.net/v1/unsecured/media/1507807800001/201410/2431/1507807800001_3815806023001_thumb.jpg?pubId=1507807800001"
+                },
+                "poster" : {
+                  "id" : "3815782921001",
+                  "src" : "http://brightcove.vo.llnwd.net/v1/unsecured/media/1507807800001/201410/273/1507807800001_3815782921001_still.jpg?pubId=1507807800001"
+                }
+              },
+              "link" : null,
+              "long_description" : "Long description for titmouse.",
+              "name" : "Titmouse7",
+              "reference_id" : "titmouse_title_refid7",
+              "schedule" : null,
+              "sharing" : null,
+              "state" : "ACTIVE",
+              "tags" : [ "bird", "wildlife" ],
+              "updated_at" : "2014-11-12T20:55:01.732Z"
+            }  
+        
++ Response 400
+
+    + Body
+
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
+
 
 ## GET a single video by reference ID [/accounts/{accountId}/videos/ref:{refId}]
 
