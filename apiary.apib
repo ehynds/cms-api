@@ -75,6 +75,8 @@ Supply a name and create a video object with that name. The response will contai
 
             {}
 
+## List or Search for videos [/accounts/{accountId}/videos?{?limit}{&offset}{&sort}{&q}]
+
 ### GET
 Use only the account ID and retrieve information on all videos in the account.
 
@@ -227,8 +229,7 @@ Use only the account ID and retrieve information on all videos in the account.
               "message" : "Resource does not exist."
             } ]
 
-## GET a count of result [/accounts/{accountId}/videos{q=search_terms}]
-
+## GET a count of result [/accounts/{accountId}/videos{?q}]
 ### GET
 Get a count of items for a list of all videos or a video search
 
