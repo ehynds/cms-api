@@ -227,6 +227,32 @@ Use only the account ID and retrieve information on all videos in the account.
               "message" : "Resource does not exist."
             } ]
 
+## GET a count of result [/accounts/{accountId}/videos{q=search_terms}]
+
+### GET
+Get a count of items for a list of all videos or a video search
+
++ Parameters
+
+    + q (optional string `tags:foo+updated_at:2014-06-01..`) ... See <a target="_blank" href="//docs.brightcove.com/en/video-cloud/cms-api/guides/search-videos.html">Search Videos</a>
+    
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+    
+            {"count": 2678}
+
 ## GET a single video/PATCH to update [/accounts/{accountId}/videos/{videoId}]
 
 ### GET
