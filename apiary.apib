@@ -229,7 +229,7 @@ Use only the account ID and retrieve information on all videos in the account.
               "message" : "Resource does not exist."
             } ]
 
-## GET a count of result [/accounts/{accountId}/videos{?q}]
+## GET a count of results [/accounts/{accountId}/videos{?q}]
 ### GET
 Get a count of items for a list of all videos or a video search
 
@@ -254,7 +254,7 @@ Get a count of items for a list of all videos or a video search
     
             {"count": 2678}
 
-## GET a single video/PATCH to update [/accounts/{accountId}/videos/{videoId}]
+## GET or update a single video [/accounts/{accountId}/videos/{videoId}]
 
 ### GET
 Use the video ID to retrieve information for a single video
@@ -454,7 +454,7 @@ The response will display all video information, with newly updated property val
               "message" : "Resource does not exist."
             } ]
 
-## GET the images for a specific video by video ID [/accounts/{accountId}/videos/{videoId}/images]
+## GET the images for a specific video [/accounts/{accountId}/videos/{videoId}/images]
 
 ### GET
 Retrieve video's images by video ID
@@ -499,7 +499,7 @@ Retrieve video's images by video ID
               "message" : "Resource does not exist."
             } ]
 
-## GET the sources for a specific video  by ID [/accounts/{accountId}/videos/{videoId}/sources]
+## GET the sources for a specific video [/accounts/{accountId}/videos/{videoId}/sources]
 
 ### GET
 Retrieve video's sources by video ID
@@ -582,3 +582,63 @@ Retrieve video's sources by video ID
               "error_code" : "NOT_FOUND",
               "message" : "Resource does not exist."
             } ]
+
+## Notifications [/accounts/{account_id}/subscriptions]
+
+The subscriptions endpoint is used to create and list subscriptions for notifications of changes in your video library.
+
+### GET
+
++ Request (application/json)
+
+    + Headers
+        
+            Authorization: Bearer {access_token}
+            
++ Response 200 (application/json)
+
+        [
+            {
+                "service_account": "999",
+                "id": "25705474-16b7-47ab-ada6-20182e8cde74",
+                "events": "video-change",
+                "endpoint": "https://mylittlepony.com/notification"
+            },
+            {
+                "service_account": "999",
+                "id": "25705474-16b7-47ab-ada6-22182e8cda90",
+                "events": "video-change",
+                "endpoint": "http://moreexamples.com/endpoint"
+            }
+        ]
+### POST
+
+Create a subscription by providing the endpoint that notifications should be sent to.
+
++ Request (application/json)
+
+    + Headers
+        
+            Authorization: Bearer {access_token}
+            
+    + Body
+
+            {
+              "endpoint": "http://solutions.brightcove.com:9002",
+              "events": [
+                    "video-change"
+                ]
+            }
+
+
++ Response 201 (application/json)
+
+        {
+            "service_account": "999",
+            "id": "25705474-16b7-47ab-ada6-20182e8cde74",
+            "events": [
+                "video-change"
+            ],
+            "endpoint": "https://mylittlepony.com/notification"
+        }
+
