@@ -588,10 +588,13 @@ Retrieve video's sources by video ID
               "message" : "Resource does not exist."
             } ]
 
-## GET the manual playlist IDs that contain a video ID [/accounts/{account_id}/videos/{video_id}/references]
+## GET the playlist IDs that contain a video ID [/accounts/{account_id}/videos/{video_id}/references]
 
 ### GET
-Retrieve an array of manual playlist IDs that contain a video ID
+Retrieve an array of manual playlist IDs that contain a video ID. Note that this request does not look at smart playlists.
+
+You can also use the video's reference ID if you wish:
+* v1beta1/accounts/{accountId}/videos/<strong>ref:123456789</strong>/references
 
 + Parameters
 
