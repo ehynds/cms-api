@@ -588,6 +588,49 @@ Retrieve video's sources by video ID
               "message" : "Resource does not exist."
             } ]
 
+## GET the manual playlist IDs that contain a video ID [/accounts/{account_id}/videos/{video_id}/references]
+
+### GET
+Retrieve an array of manual playlist IDs that contain a video ID
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + video_id (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+            
+            {
+              "playlists" : [ 
+                "1034308987001", 
+                "1031699374001", 
+                "1768196159001" 
+              ]
+            } 
+            
++ Response 400
+
+    + Body
+
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
+
+
 # Group Manage Subscriptions
 
 ## Create or list subscriptions [/accounts/{account_id}/subscriptions]
