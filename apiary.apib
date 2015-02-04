@@ -257,7 +257,7 @@ Get a count of items for a list of all videos or a video search
     
             {"count": 2678}
 
-## GET or update a single video [/accounts/{account_id}/videos/{video_id}]
+## GET, update or DELETE a single video [/accounts/{account_id}/videos/{video_id}]
 
 ### GET
 
@@ -459,6 +459,44 @@ The response will display all video information, with newly updated property val
               "message" : "Resource does not exist."
             } ]
 
+### DELETE
+
+Use the video ID to delete a single video object.
+
+This delete will not work with the sharer copy of a shared video.  
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + video_id (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {}
+        
++ Response 400
+
+    + Body
+
+            [ {
+              "error_code" : "NOT_FOUND",
+              "message" : "Resource does not exist."
+            } ]
+
+
 ## GET the images for a specific video [/accounts/{account_id}/videos/{video_id}/images]
 
 ### GET
@@ -638,6 +676,9 @@ You can also use the video's reference ID if you wish:
 ### GET
 
 Get a count of the playlists in the account.
+
+When you get your client credentials, you will need to include the following operation permission:
+* <code>"operations": [ "video-cloud/playlist/all" ]</code>
 
 + Parameters
 
