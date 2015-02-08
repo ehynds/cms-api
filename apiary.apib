@@ -16,7 +16,7 @@ Examples show using video IDs, but you can also use the video's reference ID if 
 * v1beta1/accounts/{accountId}/videos<strong>/123456789</strong>
 * v1beta1/accounts/{accountId}/videos<strong>/ref:43219876</strong>
 
-# Group Manipulate Video Information
+# Group Manage Videos
 
 Create a single video and retrieve various video information. The endpoint is determined by the information requested. Some retrieval requests can use either the video ID or reference ID.
 
@@ -68,7 +68,7 @@ Supply a name and create a video object with that name. The response will contai
               "tags": [],
               "updated_at": "2014-11-12T21:12:52.583Z"
             }
-            
+
 + Response 400
 
     + Body
@@ -196,7 +196,7 @@ Use only the account ID and retrieve information on all videos in the account.
               "tags": ["bird", "wildlife"],
               "updated_at": "2014-11-12T20:55:01.732Z"
             },
-            ... 
+            ...
             {
               "id": "3674727956001",
               "account_id": "1507807800001",
@@ -239,7 +239,7 @@ Get a count of items for a list of all videos or a video search
 
     + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
     + q (optional string `tags:foo+updated_at:2014-06-01..`) ... See <a target="_blank" href="//docs.brightcove.com/en/video-cloud/cms-api/guides/search-videos.html">Search Videos</a>
-    
+
 + Request
 
     + Headers
@@ -254,7 +254,7 @@ Get a count of items for a list of all videos or a video search
 + Response 200
 
     + Body
-    
+
             {"count": 2678}
 
 ## GET, update or DELETE a single video [/accounts/{account_id}/videos/{video_id}]
@@ -343,8 +343,8 @@ Use the video ID to retrieve information for a single video
               "state" : "ACTIVE",
               "tags" : [ "bird", "wildlife" ],
               "updated_at" : "2014-11-12T20:55:01.732Z"
-            }  
-        
+            }
+
 + Response 400
 
     + Body
@@ -361,7 +361,7 @@ Update video properties using the video ID to identify video
 New values for video properties are passed as a JSON object in the body. The following are special cases to consider:
 * For any given property a new value can be supplied and no other fields will be affected
 * If the property is an array field ALL array values must be supplied or only the one(s) passed in the body will exist; for instance you cannot update just one cuepoint array element, all cuepoints must be in the JSON object
-* If the property is a map field single child properties can be updated, for instance to update part of the schedule map you would use <code>"schedule": {"ends_at": "new value"}</code> in the body  
+* If the property is a map field single child properties can be updated, for instance to update part of the schedule map you would use <code>"schedule": {"ends_at": "new value"}</code> in the body
 
 The response will display all video information, with newly updated property values
 
@@ -448,8 +448,8 @@ The response will display all video information, with newly updated property val
               "state" : "ACTIVE",
               "tags" : [ "bird", "wildlife" ],
               "updated_at" : "2014-11-12T20:55:01.732Z"
-            }  
-        
+            }
+
 + Response 400
 
     + Body
@@ -463,7 +463,7 @@ The response will display all video information, with newly updated property val
 
 Use the video ID to delete a single video object.
 
-This delete will not work with the sharer copy of a shared video.  
+This delete will not work with the sharer copy of a shared video.
 
 + Parameters
 
@@ -486,7 +486,7 @@ This delete will not work with the sharer copy of a shared video.
     + Body
 
             {}
-        
+
 + Response 400
 
     + Body
@@ -532,7 +532,7 @@ Retrieve video's images by video ID
                 "src": "http://brightcove.vo.llnwd.net/v1/unsecured/media/1507807800001/201410/273/1507807800001_3815782921001_still.jpg?pubId=1507807800001"
               }
             }
-            
+
 + Response 400
 
     + Body
@@ -603,7 +603,7 @@ Retrieve video's sources by video ID
               "size": 758866,
               "uploaded_at": "2013-01-23T20:40:52.716Z"
             },
-            ... 
+            ...
             {
               "id": "2114527084001",
               "src": "http://brightcove.vo.llnwd.net/e1/uds/pd/1507807800001/1507807800001_2114527084001_Bird-Titmouse7.mp4",
@@ -616,7 +616,7 @@ Retrieve video's sources by video ID
               "size": 1573347,
               "uploaded_at": "2013-01-23T20:42:02.990Z"
             }]
-            
+
 + Response 400
 
     + Body
@@ -653,15 +653,15 @@ You can also use the video's reference ID if you wish:
 + Response 200
 
     + Body
-            
+
             {
-              "playlists" : [ 
-                "1034308987001", 
-                "1031699374001", 
-                "1768196159001" 
+              "playlists" : [
+                "1034308987001",
+                "1031699374001",
+                "1768196159001"
               ]
-            } 
-            
+            }
+
 + Response 400
 
     + Body
@@ -670,6 +670,8 @@ You can also use the video's reference ID if you wish:
               "error_code" : "NOT_FOUND",
               "message" : "Resource does not exist."
             } ]
+
+# Group Manage Playlists
 
 ## Get a count of playlists [/accounts/{account_id}/counts/playlists]
 
@@ -683,7 +685,7 @@ When you get your client credentials, you will need to include the following ope
 + Parameters
 
     + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
-    
+
 + Request
 
     + Headers
@@ -698,9 +700,118 @@ When you get your client credentials, you will need to include the following ope
 + Response 200
 
     + Body
-    
+
             {
               "count" : 22
+            }
+
+## Get a list of playlists [/accounts/{account_id}/playlists]
+
+The playlists endpoint returns a list of playlist objects
+
+### GET
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [
+                {
+                  "id" : "3907894074001",
+                  "account_id" : "57838016001",
+                  "created_at" : "2014-11-26T16:42:19.161Z",
+                  "description" : null,
+                  "favorite" : false,
+                  "limit" : 30,
+                  "name" : "Bird Videos",
+                  "reference_id" : null,
+                  "search" : "+tags:\"bird\",\"birds\"",
+                  "type" : "ACTIVATED_NEWEST_TO_OLDEST",
+                  "updated_at" : "2014-11-26T16:42:19.205Z",
+                  "video_ids" : [ ]
+                }, {
+                  "id" : "3830671306001",
+                  "account_id" : "57838016001",
+                  "created_at" : "2014-10-14T13:51:39.956Z",
+                  "description" : null,
+                  "favorite" : false,
+                  "limit" : 30,
+                  "name" : "Untitled Playlist",
+                  "reference_id" : null,
+                  "search" : "+tags:\"insects\"",
+                  "type" : "ACTIVATED_NEWEST_TO_OLDEST",
+                  "updated_at" : "2014-10-14T13:51:39.991Z",
+                  "video_ids" : [ ]
+                }, {
+                  "id" : "3702288293001",
+                  "account_id" : "57838016001",
+                  "created_at" : "2014-07-31T13:14:51.167Z",
+                  "description" : null,
+                  "favorite" : false,
+                  "limit" : 100,
+                  "name" : "short Playlist",
+                  "reference_id" : null,
+                  "search" : null,
+                  "type" : "EXPLICIT",
+                  "updated_at" : "2014-07-31T13:15:02.739Z",
+                  "video_ids" : [ "734451480001", "68143720001" ]
+                }
+            ]
+
+## Get a single playlist by id [/accounts/{account_id}/playlists/{playlist_id}]
+
+Returns a single playlist with the playlist id specified
+
+### GET
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + playlist_id (required string '999888777666') ... The Video Cloud playlist id
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "3702288293001",
+              "account_id" : "57838016001",
+              "created_at" : "2014-07-31T13:14:51.167Z",
+              "description" : null,
+              "favorite" : false,
+              "limit" : 100,
+              "name" : "short Playlist",
+              "reference_id" : null,
+              "search" : null,
+              "type" : "EXPLICIT",
+              "updated_at" : "2014-07-31T13:15:02.739Z",
+              "video_ids" : [ "734451480001", "68143720001" ]
             }
 
 
@@ -722,9 +833,9 @@ Get a list of your subscriptions.
 + Request (application/json)
 
     + Headers
-        
+
             Authorization: Bearer {access_token}
-            
+
 + Response 200 (application/json)
 
         [
@@ -749,9 +860,9 @@ Create a subscription by providing the endpoint that notifications should be sen
 + Request (application/json)
 
     + Headers
-        
+
             Authorization: Bearer {access_token}
-            
+
     + Body
 
             {
@@ -782,9 +893,9 @@ Retrieves a subscription
 + Request (application/json)
 
     + Headers
-        
+
             Authorization: Bearer {access_token}
-            
+
 + Response 200 (application/json)
 
         {
@@ -803,8 +914,8 @@ Remove a subscription
 + Request (application/json)
 
     + Headers
-        
+
             Authorization: Bearer {access_token}
-            
+
 + Response 204
 
