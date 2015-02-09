@@ -814,6 +814,55 @@ Returns a single playlist with the playlist id specified
               "video_ids" : [ "734451480001", "68143720001" ]
             }
 
+## Get the video objects for a playlist [/accounts/{account_id}/playlists/{playlist_id}/videos]
+
+### GET
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + playlist_id (required string '999888777666') ... The Video Cloud playlist id
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+            [ {
+              "id" : "1195045807001",
+              "account_id" : "57838016001",
+              "complete" : true,
+              "created_at" : "2011-10-02T15:32:51.073Z",
+              "cue_points" : [ ],
+              "custom_fields" : {
+                "purpose" : "Training"
+              },
+              "description" : "Bugs-Butterfly",
+              "duration" : 27495,
+              "economics" : "AD_SUPPORTED",
+              "folder_id" : null,
+              "geo" : null,
+              "images" : { },
+              "link" : null,
+              "long_description" : null,
+              "name" : "Bugs-Butterfly",
+              "reference_id" : "1195045807001",
+              "schedule" : null,
+              "sharing" : null,
+              "state" : "ACTIVE",
+              "tags" : [ "newtag", "wildlife", "insects" ],
+              "text_tracks" : [ ],
+              "updated_at" : "2014-10-31T18:30:12.257Z"
+            } ]
 
 # Group Manage Subscriptions
 
