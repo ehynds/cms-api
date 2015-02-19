@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://cms.api.brightcove.com/v1beta1
+HOST: https://cms.api.brightcove.com/v1
 
 # CMS API
 The CMS API allows creation of video objects and retrieval of video information.
@@ -13,8 +13,8 @@ The base URL for these APIs is:
 ## IDs and Reference IDs
 
 Examples show using video IDs, but you can also use the video's reference ID if you wish. If you use the reference ID you must prepend that identifier with <code>ref:</code>. For example, the first URL uses the video ID, whereas the second uses the reference ID.
-* v1beta1/accounts/{accountId}/videos<strong>/123456789</strong>
-* v1beta1/accounts/{accountId}/videos<strong>/ref:43219876</strong>
+* /accounts/{accountId}/videos<strong>/123456789</strong>
+* /accounts/{accountId}/videos<strong>/ref:43219876</strong>
 
 # Group Manage Videos
 
@@ -705,11 +705,55 @@ When you get your client credentials, you will need to include the following ope
               "count" : 22
             }
 
-## Get a list of playlists [/accounts/{account_id}/playlists]
+## Create of Get a list of playlists [/accounts/{account_id}/playlists]
 
-The playlists endpoint returns a list of playlist objects
+The playlists endpoint is used to create a playlist or retrieve a list of playlists.
+
+### POST
+Create a playlist.
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "description" : "My first bird playlist",
+              "name" : "Bird Videos",
+              "reference_id" : "bird-playlist-1",
+              "type" : "EXPLICIT,
+              "video_ids" : ["123456789" , "987654321", "999888777666"]
+            }
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "3907894074001",
+              "account_id" : "57838016001",
+              "created_at" : "2015-02-17T16:42:19.161Z",
+              "description" : "My first bird playlist",
+              "favorite" : false,
+              "limit": 100,
+              "search": null,
+              "name" : "Bird Videos",
+              "reference_id" : "bird-playlist-1",
+              "type" : "EXPLICIT",
+              "updated_at" : "2015-02-17T16:42:19.161Z",
+              "video_ids" : ["123456789" , "987654321", "999888777666"]
+            }
 
 ### GET
+Get a list of playlists.
 
 + Parameters
 
@@ -773,11 +817,12 @@ The playlists endpoint returns a list of playlist objects
                 }
             ]
 
-## Get a single playlist by id [/accounts/{account_id}/playlists/{playlist_id}]
+## Manage a single playlist by id [/accounts/{account_id}/playlists/{playlist_id}]
 
-Returns a single playlist with the playlist id specified
+Update or retrieve a single playlist with the playlist id specified
 
 ### GET
+Retrieve a single playlist by id
 
 + Parameters
 
@@ -804,6 +849,47 @@ Returns a single playlist with the playlist id specified
               "account_id" : "57838016001",
               "created_at" : "2014-07-31T13:14:51.167Z",
               "description" : null,
+              "favorite" : false,
+              "limit" : 100,
+              "name" : "short Playlist",
+              "reference_id" : null,
+              "search" : null,
+              "type" : "EXPLICIT",
+              "updated_at" : "2014-07-31T13:15:02.739Z",
+              "video_ids" : [ "734451480001", "68143720001" ]
+            }
+
+### PATCH
+Update a playlist
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "description" : null,
+              "favorite" : false,
+              "name" : "short Playlist",
+              "description" : "A short playlist of current videos",
+              "search" : null,
+              "type" : "EXPLICIT",
+              "video_ids" : [ "734451480001", "68143720001" ]
+            }
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "3702288293001",
+              "account_id" : "57838016001",
+              "created_at" : "2014-07-31T13:14:51.167Z",
+              "description" : "A short playlist of current videos",
               "favorite" : false,
               "limit" : 100,
               "name" : "short Playlist",
