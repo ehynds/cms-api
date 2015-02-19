@@ -733,7 +733,7 @@ Create a playlist.
               "video_ids" : ["123456789" , "987654321", "999888777666"]
             }
 
-+ Response 200
++ Response 201
 
     + Body
 
@@ -950,6 +950,357 @@ Update a playlist
               "updated_at" : "2014-10-31T18:30:12.257Z"
             } ]
 
+# Group Manage Folders
+The folders endpoint is used to create a folder or get a list of folders.
+
+## Create or list folders [/accounts/{account_id}/folders]
+
+### POST
+Create a folder.
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "name" : "This must a unique folder name for the account, 100 characters or less"
+            }
+
++ Response 201
+
+    + Body
+
+            {
+              "id" : "3907894074001",
+              "account_id" : "57838016001",
+              "created_at" : "2015-02-17T16:42:19.161Z",
+              "name" : "This must a unique folder name for the account, 100 characters or less",
+              "updated_at" : "2015-02-17T16:42:19.161Z",
+              version: 1,
+              "video_count" : 0
+            }
+
+### GET
+Get a list of folders for the account
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [
+              {
+                "id" : "3907894074001",
+                "account_id" : "57838016001",
+                "created_at" : "2015-02-17T16:42:19.161Z",
+                "name" : "This must a unique folder name for the account, 100 characters or less",
+                "updated_at" : "2015-02-17T16:42:19.161Z",
+                version: 1,
+                "video_count" : 0
+              },
+              {
+                "id" : "5555666677778888",
+                "account_id" : "57838016001",
+                "created_at" : "2015-02-17T16:42:19.161Z",
+                "name" : "Bird videos",
+                "updated_at" : "2015-02-17T16:42:19.161Z",
+                version: 1,
+                "video_count" : 12
+              }
+
+            ]
+
+## Get, update, or delete folder [/accounts/{account_id}/folders/{folder_id}]
+
+### GET
+Retrieve information for a folder
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "3907894074001",
+              "account_id" : "57838016001",
+              "created_at" : "2015-02-17T16:42:19.161Z",
+              "name" : "Bird Videos",
+              "updated_at" : "2015-02-17T16:42:19.161Z",
+              version: 1,
+              "video_count" : 12
+            }
+
+### PATCH
+Update a folder name.
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "name": "Favorite Bird Videos"
+            }
+
++ Response 200
+
+    + Body
+
+            {
+              "id" : "3907894074001",
+              "account_id" : "57838016001",
+              "created_at" : "2015-02-17T16:42:19.161Z",
+              "name" : "Favorite Bird Videos",
+              "updated_at" : "2015-02-17T16:42:19.161Z",
+              version: 1,
+              "video_count" : 12
+            }
+
+### DELETE
+Delete a folder - does **not** delete the videos it contains.
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 204
+
+## Get videos for a folder [/accounts/{account_id}/folders/{folder_id}/videos]
+
+### GET
+Get the video objects contained in a folder
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            [{
+              "id": "3887610706001",
+              "account_id": "1507807800001",
+              "complete": false,
+              "created_at": "2014-11-12T21:12:52.582Z",
+              "cue_points": [],
+              "custom_fields": {},
+              "description": null,
+              "duration": null,
+              "economics": "AD_SUPPORTED",
+              "geo": null,
+              "images": {},
+              "link": null,
+              "long_description": null,
+              "name": "Fish Jumping",
+              "reference_id": null,
+              "schedule": null,
+              "sharing": null,
+              "state": "ACTIVE",
+              "tags": [],
+              "updated_at": "2014-11-12T21:12:52.583Z"
+            }, {
+              "id": "2114345471001",
+              "account_id": "1507807800001",
+              "complete": true,
+              "created_at": "2013-01-23T19:06:16.328Z",
+              "cue_points": [{
+                "name": "Flying Off",
+                "type": "CODE",
+                "time": 2.64,
+                "metadata": null,
+                "force_stop": false,
+                "asset_id": null
+              }, {
+                "name": "Pre-roll",
+                "type": "AD",
+                "time": 0.0,
+                "metadata": null,
+                "force_stop": false,
+                "asset_id": null
+              }, {
+                "name": "Bird Back",
+                "type": "CODE",
+                "time": 5.938,
+                "metadata": null,
+                "force_stop": false,
+                "asset_id": null
+              }, {
+                "name": "Post-roll",
+                "type": "AD",
+                "time": 8.242,
+                "metadata": null,
+                "force_stop": false,
+                "asset_id": null
+              }],
+              "custom_fields": {
+                "customfield1": "Approved"
+              },
+              "description": "Short description for titmouse.",
+              "duration": 8242,
+              "economics": "AD_SUPPORTED",
+              "geo": null,
+              "images": {
+                "thumbnail": {
+                  "id": "3815806023001",
+                  "src": "http://brightcove.vo.llnwd.net/v1/unsecured/media/1507807800001/201410/2431/1507807800001_3815806023001_thumb.jpg?pubId=1507807800001"
+                },
+                "poster": {
+                  "id": "3815782921001",
+                  "src": "http://brightcove.vo.llnwd.net/v1/unsecured/media/1507807800001/201410/273/1507807800001_3815782921001_still.jpg?pubId=1507807800001"
+                }
+              },
+              "link": null,
+              "long_description": "Long description for titmouse.",
+              "name": "Titmouse7",
+              "reference_id": "titmouse_title_refid7",
+              "schedule": null,
+              "sharing": null,
+              "state": "ACTIVE",
+              "tags": ["bird", "wildlife"],
+              "updated_at": "2014-11-12T20:55:01.732Z"
+            },
+            ...
+            {
+              "id": "3674727956001",
+              "account_id": "1507807800001",
+              "complete": false,
+              "created_at": "2014-07-14T19:37:40.946Z",
+              "cue_points": [],
+              "custom_fields": {},
+              "description": "Bumper video.",
+              "duration": 8775,
+              "economics": "AD_SUPPORTED",
+              "geo": null,
+              "images": {},
+              "link": null,
+              "long_description": null,
+              "name": "Bumper",
+              "reference_id": "bumper_title_refidF",
+              "schedule": null,
+              "sharing": null,
+              "state": "ACTIVE",
+              "tags": [],
+              "updated_at": "2014-07-14T19:37:41.010Z"
+            }]
+
+## Add or remove video to/from folder [/accounts/{account_id}/folders/{folder_id}/videos/{video_id}]
+
+### PUT
+Adds a video to the folder
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+    + video_id (required string `282373736`) ... The id for the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 204
+
+### DELETE
+Removes a video from the folder
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + folder_id (required string `8376574883`) ... The id for the folder
+    + video_id (required string `282373736`) ... The id for the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 204
+
 # Group Manage Subscriptions
 
 ## Create or list subscriptions [/accounts/{account_id}/subscriptions]
@@ -1025,6 +1376,11 @@ Create a subscription by providing the endpoint that notifications should be sen
 
 Retrieves a subscription
 
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + subscription_id (required string `8877665553`) ... The id for the subscription
+
 + Request (application/json)
 
     + Headers
@@ -1045,6 +1401,11 @@ Retrieves a subscription
 ### DELETE
 
 Remove a subscription
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + subscription_id (required string `8877665553`) ... The id for the subscription
 
 + Request (application/json)
 
