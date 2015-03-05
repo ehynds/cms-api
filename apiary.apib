@@ -257,7 +257,66 @@ Get a count of items for a list of all videos or a video search
 
             {"count": 2678}
 
-## GET, update or DELETE a single video [/accounts/{account_id}/videos/{video_id}]
+## Get playlists for a video or remove video from playlists [/accounts/{account_id}/videos/{video_id}/references]
+
+### GET
+
+Get an array of playlist ids for the manual playlists that the video belongs to
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + video_id (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {
+                "playlists": [
+                    "640512400001",
+                    "749117323001"
+                ]
+            }
+
+### DELETE
+
+Removes the video from all manual playlists that it is assigned to (necessary before the video itself can be deleted)
+
++ Parameters
+
+    + account_id (required string `20318290001`) ... The Video Cloud account id (in older versions of Studio called the Publisher ID)
+    + video_id (required string `12345678`) ... The ID of the video
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer {token}
+            Content-Type: application/json
+
+    + Body
+
+            {}
+
++ Response 200
+
+    + Body
+
+            {}
+
+## Get, update or Delete a single video [/accounts/{account_id}/videos/{video_id}]
 
 ### GET
 
